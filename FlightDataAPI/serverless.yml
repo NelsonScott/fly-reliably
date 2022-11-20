@@ -1,0 +1,34 @@
+org: realscottnelson
+app: airlinereliabilitystats
+service: aws-flight-stats-lambda
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  httpApi:
+    cors: true
+  runtime: python3.8
+  iam:
+    role:
+      statements:
+        # Allow functions to list all buckets
+        - Effect: Allow
+          Action: 's3:ListBucket'
+          Resource: '*'
+        # Allow functions to read/write objects in a bucket
+        - Effect: Allow
+          Action:
+            - '*'
+          Resource:
+            - 'arn:aws:s3:::airlinereliabilitystats/*'
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+
+plugins:
+  - serverless-plugin-datadog
