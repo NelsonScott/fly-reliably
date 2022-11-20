@@ -1,0 +1,36 @@
+{
+  "name": "Fly Reliably",
+  "description": "Show Delays & Cancellation Rates on Google Flights results",
+  "version": "1.0",
+  "version_name": "1.0 - Beta Release",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "/images/fly-icon-16.png",
+      "32": "/images/fly-icon-32.png",
+      "48": "/images/fly-icon-48.png",
+      "128": "/images/fly-icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "/images/fly-icon-16.png",
+    "32": "/images/fly-icon-32.png",
+    "48": "/images/fly-icon-48.png",
+    "128": "/images/fly-icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.google.com/*flights*"
+      ],
+      "js": [
+        "jquery-3.6.1.min.js",
+        "extension.js"
+      ]
+    }
+  ]
+}
