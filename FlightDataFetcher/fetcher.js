@@ -4,11 +4,14 @@ const { executablePath } = require('puppeteer')
 var https = require('https');
 const fs = require("fs");
 
+// TODO: there's a fair bit of cleanup needed in here, removing unused stuff, etc
+
 // TODO: could add datadog here? Or from above when running it
 module.exports.run = async (event, context) => {
     console.log('Starting fetcher');
     // args: ['--start-maximized']
     // Set the downloads location
+    // TODO: this, along with puppeteer extras in gen, may not be needed
     var dir = "/home/ubuntu/AirlineStatsFetcher/downloads";
     console.log('dir to set for downloads', dir);
     puppeteer.use(require('puppeteer-extra-plugin-user-preferences')
@@ -66,6 +69,7 @@ module.exports.run = async (event, context) => {
     await navigationPromise;
 
     // Doesn't seem to work
+    // TOOD: see if safely remove
     await page.waitForSelector('table > tbody > tr > .finePrint:nth-child(3) > a:nth-child(2)');
     console.log('Clicking on link to download CSV');
     await page.click('table > tbody > tr > .finePrint:nth-child(3) > a:nth-child(2)');
