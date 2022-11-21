@@ -22,6 +22,13 @@ provider:
           Resource:
             - 'arn:aws:s3:::airlinereliabilitystats/*'
 
+custom:
+  datadog:
+    site: datadoghq.com
+    enableDDLogs: true
+    apiKeySecretArn: arn:aws:secretsmanager:us-east-1:754145745478:secret:DdApiKeySecret-M1E2JbZn0jIY-h5mrp9
+    logLevel: info
+
 functions:
   hello:
     handler: handler.hello
