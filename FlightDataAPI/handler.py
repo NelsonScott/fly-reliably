@@ -12,6 +12,7 @@ Returns JSON in following format:
     ...
 }
 '''
+# TODO: using default 'hello' name'
 def hello(event, context):
     # Note: Single line logs are ingested into datadog fine, but json dumps not so much
     # Or, as shown below, don't need to json.dumps at all?
