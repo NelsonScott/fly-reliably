@@ -36,4 +36,4 @@ Feel free to open a Pull Request (preferred) or open an issue, but note there ar
 
 ### License
 
-See the [MIT licensed](./LICENSE).
+FlightDataFetcher is [MIT licensed](./LICENSE).
