@@ -12,4 +12,4 @@ Feel free to open a Pull Request (preferred) or open an issue.
 
 ### License
 
-See the [MIT licensed](./LICENSE).
+See the [MIT license](./LICENSE).
