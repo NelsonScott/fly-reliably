@@ -9,8 +9,6 @@ var StatsD = require('hot-shots');
 var dogstatsd = new StatsD();
 
 dogstatsd.increment('fetcher.runs');
-
-// TODO: there's a fair bit of cleanup needed in here, removing unused stuff, etc
 module.exports.run = async (event, context) => {
     console.log('Starting Airline data fetcher');
 
@@ -18,12 +16,12 @@ module.exports.run = async (event, context) => {
         headless: true, slowMo: 100
     });
     const page = await browser.newPage();
-    page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
+    // TODO: Not sure how useful the page console logs are, maybe move to debug
+    // page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
     await page.addScriptTag({ url: 'https://code.jquery.com/jquery-3.2.1.min.js' })
     const navigationPromise = page.waitForNavigation()
 
     await page.goto('https://www.transtats.bts.gov/OT_Delay/OT_DelayCause1.asp');
-    await page.screenshot({ path: 'transtats.png' });
 
     await page.waitForSelector('#PeriodFrom')
     let optionValuePeriodFrom = await page.$$eval('option', options => {
@@ -53,13 +51,8 @@ module.exports.run = async (event, context) => {
 
     await navigationPromise;
 
-    // Doesn't seem to work
-    // TOOD: see if safely remove
-    await page.waitForSelector('table > tbody > tr > .finePrint:nth-child(3) > a:nth-child(2)');
-    console.log('Clicking on link to download CSV');
-    await page.click('table > tbody > tr > .finePrint:nth-child(3) > a:nth-child(2)');
-
     // https://stackoverflow.com/questions/74424735/puppeteer-not-actually-downloading-zip-despite-clicking-link
+    await page.waitForSelector('table > tbody > tr > .finePrint:nth-child(3) > a:nth-child(2)');
     const handle = await page.$(
         "table > tbody > tr > .finePrint:nth-child(3) > a:nth-child(2)"
       );
@@ -84,37 +77,6 @@ module.exports.run = async (event, context) => {
             console.log("Download Completed");
         });
     });
-
-    console.log('Getting links');
-    const links = await page.evaluate(
-        () => Array.from(
-            document.querySelectorAll('a[href]'),
-            a => {
-                dict = {};
-                dict['href'] = a.getAttribute('href');
-                dict['innerText'] = a.innerText;
-                return dict;
-            }
-        )
-    );
-
-    for (let idx = 0; idx < links.length; idx++) {
-        const link = links[idx];
-        if (link.innerText === 'Download Raw Data') {
-            console.log('Found download link', link.href);
-            console.log('Text was', link.innerText);
-            // var url = new URL(link.href, "https://www.transtats.bts.gov/OT_Delay/") 
-            // https.get(url, (resp) => {
-            //     let data = '';
-            //     resp.on('data', (chunk) => {
-            //         data += chunk;
-            //     });
-            //     resp.on('end', () => {
-            //         console.log('Downloaded data', data);
-            //     });
-            // });
-        }
-    }
 
     await browser.close();
     console.log('Fetcher finished');
