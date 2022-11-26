@@ -2,8 +2,7 @@
 const tracer = require('dd-trace').init()
 
 // const puppeteer = require('puppeteer');
-const puppeteer = require("puppeteer-extra");
-const { executablePath } = require('puppeteer')
+const puppeteer = require('puppeteer')
 var https = require('https');
 const fs = require("fs");
 var StatsD = require('hot-shots');
@@ -12,32 +11,11 @@ var dogstatsd = new StatsD();
 dogstatsd.increment('fetcher.runs');
 
 // TODO: there's a fair bit of cleanup needed in here, removing unused stuff, etc
-
-// TODO: could add datadog here? Or from above when running it
 module.exports.run = async (event, context) => {
-    console.log('Starting fetcher');
-    // args: ['--start-maximized']
-    // Set the downloads location
-    // TODO: this, along with puppeteer extras in gen, may not be needed
-    var dir = "/home/ubuntu/AirlineStatsFetcher/downloads";
-    console.log('dir to set for downloads', dir);
-    puppeteer.use(require('puppeteer-extra-plugin-user-preferences')
-        (
-            {
-                userPrefs: {
-                    download: {
-                        prompt_for_download: false,
-                        open_pdf_in_system_reader: true,
-                        default_directory: dir,
-                    },
-                    plugins: {
-                        always_open_pdf_externally: true
-                    },
-                }
-            }));
+    console.log('Starting Airline data fetcher');
 
     const browser = await puppeteer.launch({
-        headless: true, slowMo: 100, executablePath: executablePath()
+        headless: true, slowMo: 100
     });
     const page = await browser.newPage();
     page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
