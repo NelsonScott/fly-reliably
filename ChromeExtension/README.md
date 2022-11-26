@@ -1,4 +1,4 @@
-# [Fly Reliably](https://github.com/NelsonScott/fly-reliably) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/nelsonscott/fly-reliably/blob/main/LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contributing)
+# [Fly Reliably](https://chrome.google.com/webstore/detail/fly-reliably/gilgkkdddkfkonaloahofpdidocaiecj) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/nelsonscott/fly-reliably/blob/main/LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contributing)
 
 Fly Reliably is a Chrome Extension to Show Airline Delays & Cancellation Rates on Google Flights.
 

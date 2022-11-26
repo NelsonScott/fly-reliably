@@ -1,4 +1,4 @@
-# [Fly Reliably]() &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)]() [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contributing)
+# [Fly Reliably](https://github.com/NelsonScott/fly-reliably) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)]() [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contributing)
 
 This is a monorepo which contains three components, you'll most likely want to check out the nested README's.
 
