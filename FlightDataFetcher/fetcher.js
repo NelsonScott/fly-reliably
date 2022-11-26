@@ -1,8 +1,15 @@
+// This line must come before importing any instrumented module.
+const tracer = require('dd-trace').init()
+
 // const puppeteer = require('puppeteer');
 const puppeteer = require("puppeteer-extra");
 const { executablePath } = require('puppeteer')
 var https = require('https');
 const fs = require("fs");
+var StatsD = require('hot-shots');
+var dogstatsd = new StatsD();
+
+dogstatsd.increment('fetcher.runs');
 
 // TODO: there's a fair bit of cleanup needed in here, removing unused stuff, etc
 

@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "dd-trace": "^3.8.0",
+    "hot-shots": "^9.3.0",
     "puppeteer": "^19.2.2",
     "puppeteer-extra": "^3.3.4",
     "puppeteer-extra-plugin-user-preferences": "^2.4.0"
